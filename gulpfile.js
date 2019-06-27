@@ -13,6 +13,12 @@ const wireDep = require('wiredep').stream;
 
 const gulpconfig = require('./gulpfile.config');
 
+
+gulp.task('copy',()=> 
+    gulp.src('bower_components/**')
+        .pipe(gulp.dest(gulpconfig.baseDir + '/bower_components/'))
+);
+
 gulp.task('complie.js',()=>
     gulp.src('src/**/*.js')
         .pipe(sourcemaps.init())
@@ -25,19 +31,19 @@ gulp.task('complie.js',()=>
 
 gulp.task('complie.scss',()=>
     gulp.src('src/**/*.scss')
-    .pipe(sourcemaps.init())
-    .pipe(sass().on('error',sass.logError))
-    .pipe(postcss([autoprefixer()]))
-    .pipe(sourcemaps.write(''))
-    .pipe(gulp.dest(gulpconfig.baseDir + '/css'))
-    .pipe(browserSync.reload({stream:true}))    
-)
+        .pipe(sourcemaps.init())
+        .pipe(sass().on('error',sass.logError))
+        .pipe(postcss([autoprefixer('last 2 version', 'safari 5', 'ie 8', 'ie 9', 'opera 12.1', 'ios 6', 'android 4')]))
+        .pipe(sourcemaps.write(''))
+        .pipe(gulp.dest(gulpconfig.baseDir + '/css'))
+        .pipe(browserSync.reload({stream:true}))    
+);
 
 gulp.task('index.html',()=>
     gulp.src('src/index.html')
-    .pipe(wireDep())
-    .pipe(gulp.dest(gulpconfig.baseDir))
-)
+        .pipe(wireDep())
+        .pipe(gulp.dest(gulpconfig.baseDir))
+);
 
 // 静态服务器
 gulp.task('serve',gulp.series(['complie.js','complie.scss','index.html', function() {
@@ -51,6 +57,6 @@ gulp.task('serve',gulp.series(['complie.js','complie.scss','index.html', functio
 }]));
 
 
-gulp.task('default',gulp.series(['serve']));
+gulp.task('default',gulp.series(['copy','serve']));
 
 
