@@ -18,6 +18,7 @@
     "autoprefixer": "^9.6.0",
     "browser-sync": "^2.26.7",
     "gulp": "^4.0.2",
+    "gulp-angular-templatecache": "^3.0.0",
     "gulp-babel": "^8.0.0",
     "gulp-concat": "^2.6.1",
     "gulp-postcss": "^8.0.0",
