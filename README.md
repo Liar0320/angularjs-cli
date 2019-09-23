@@ -4,7 +4,7 @@
 
 ## Prerequisites
 
-the CLI have test in  Node 10.15.1, together
+the CLI  test in  Node 10.15.1, together
 with NPM 6.4.1.
 
 ## Table of Contents
